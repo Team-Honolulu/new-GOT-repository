@@ -1,4 +1,4 @@
-package com.company;
+package org.softuni;
 
 import java.awt.*;
 
@@ -34,6 +34,11 @@ public class Bullet {
     }
 
     //FUNCTIONS
+
+    public double getx(){return x;}
+    public double gety(){return y;}
+    public double getr(){return r;}
+
     public boolean update() {
 
         x += dx;
@@ -49,8 +54,7 @@ public class Bullet {
 
     public void draw(Graphics2D g) {
 
-        g.SetColor(color1);
+        g.setColor(color1);
         g.fillOval((int)(x - r), (int)(y - r), 2 * r, 2 * r);
     }
 
-}
