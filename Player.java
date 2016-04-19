@@ -1,6 +1,8 @@
+package org.softuni;
+
 import java.awt.*;
 
-poblic class Player {
+public class Player {
 	
 	// FIELDS
 	private int x;
@@ -35,9 +37,9 @@ poblic class Player {
 		y = GamePanel.HEIGHT / 2;
 		r = 5;
 		
-		dx 0 ;
+		dx = 0 ;
 		dy = 0;
-		speef = 5;
+		speed = 5;
 		
 		lives = 3;
 		color1 = Color.WHITE;
@@ -175,70 +177,5 @@ poblic class Player {
 			g.drawOval(x - r, y - r, 2 * r, 2 * r);
 			g.setStroke(new BasicStroke(1));
 		}
-		
-		
-		// We have to make changes in GamePanel.java:
-		// under "private double averageFPS" we add
-		// private Player player;
-		//
-		// ...and under "g = (Graphics2D) image.GetGraphics();" we add
-		// player = new Player();
-		//
-		// ...and in method "gameUpdate()" we add
-		// player.update();
-		//
-		// ...and under "g.drawString("FPS: " + averageFPS, 10, 10)" we add
-		// player.draw(g);
-		//
-		// ...and in method "addNotify" after the scopes of "if" statement we add 
-		// addKeyListener(this);
-		//
-		// ...and in "public class GamePanel extends JPanel implements Runnable" at the same line we add
-		// , KeyListener
-		//
-		// ...and under method "private void gameDraw" we add another three methods
-		//
-		// public void keyTyped(KeyEvent key) {}
-		// 	
-		// public void keyPressed(KeyEvent key) {
-		//		int keyCode = key.getKeyCode();
-		//		if (keyCode == KeyEvent.VK_LEFT) {
-		//			player.setLeft(true);
-		//		}
-		//		if (keyCode == KeyEvent.VK_RIGHT) {
-		//			player.setRight(true);
-		//		}
-		//		if (keyCode == KeyEvent.VK_UP) {
-		//			player.setUp(true);
-		//		}
-		//		if (keyCode == KeyEvent.VK_DOWN) {
-		//			player.setDown(true);
-		//		}
-		// }
-		// 
-		// public void keyReleased(KeyEvent key) {
-		//		int keyCode = key.getKeyCode();
-		//		if (keyCode == KeyEvent.VK_LEFT) {
-		//			player.setLeft(false);
-		//		}
-		//		if (keyCode == KeyEvent.VK_RIGHT) {
-		//			player.setRight(false);
-		//		}
-		//		if (keyCode == KeyEvent.VK_UP) {
-		//			player.setUp(false);
-		//		}
-		//		if (keyCode == KeyEvent.VK_DOWN) {
-		//			player.setDown(false);
-		//		}
-		// }
-		// 
-		//
-		// ...and we add 
-		// import java.awt.event.*;
-		//
-		// ...and in method gameRender() we change g.setColor(Color.WHITE) to  
-		// g.setColor(new Color(0, 100, 255))  //(this changes the background of the panel)
-		// 
 	}
-
 }
