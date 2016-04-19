@@ -80,7 +80,81 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     private void gameUpdate(){    // here goes all of the game logic
-
+		
+		//new wave
+		if (waveStartTimer == 0 && enemies.size() == 0) {
+			waveNumber++;
+			waveStart = false;
+			waveStartTimer = System.nanoTime()
+		}
+		else {
+			waveStartTimerDiff = (System.nanoTime() - waveStartTimer) / 1000000;
+			if (waveStartTimerDiff > waveDelay) {
+				waveStart = true;
+				waveStartTimer = 0;
+				waveStartTimerDiff = 0;
+			}
+		}
+		
+		// create enemies
+		if (waveStart && enemies.size() == 0) {
+			createNewEnemies();
+		}
+		
+		// player update
+		player.update();
+		
+		// bullet update
+		for(int i = 0; i < bullets.size(); i++) {
+			boolean remove = bullets.get(i).update();
+			if (remove) {
+				bullets.remove(i);
+				i--;
+			}
+		}
+		
+		// enemy update
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).update;
+		}
+		
+		// bullet-enemy collision
+		for (int i = 0; < bull.size(); i++) {
+			
+			Bullet b = bullets.get(i);
+			double bx = b.getx();
+			double by = b.gety();
+			double br = b.getr();
+			
+			for (int j = 0; j < enemies.size(); j++) {
+				
+				Enemy e = enemies.get(k);
+				double ex = e.getx();
+				double ey = e.gety();
+				double er = e.getr();
+				
+				double dx = bx - ex;
+				double dy = by - ey;
+				double dist = Math.sqrt(dx * dx + dy * dy);
+				
+				if (dist < br + er) {
+					e.hit();
+					bullets.remove(i);
+					i--;
+					break;
+				}
+			}
+			
+			// player-enemy collision
+		}
+		
+		// check dead enemies
+		for (int i = 0; enemies.size(); i++) {
+			if (enemies.get(i).isDead()) {
+				enemies.remove(i);
+				i--;
+			}
+		}
     }
 
     private  void gameRender(){   // offscreen image (double buffering)
